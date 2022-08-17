@@ -19,5 +19,5 @@ tm_shape(guara)+
   tm_shape(census_gta)+
   tm_polygons()
 
-
-read_urban_concentrations()
+# save vector data
+st_write(guara,"vector_data/guara/guara.shp")
