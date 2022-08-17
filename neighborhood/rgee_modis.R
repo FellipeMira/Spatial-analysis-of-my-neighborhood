@@ -5,6 +5,7 @@ pacman::p_load(char = c('reticulate', 'rgee', 'remotes', 'sf',
                         'ggplot2', 'googledrive', 'geojsonio', 'ggpubr'),
                install = T, update = F, character.only = T)
 
+rgee::ee_Initialize(drive = T)
 
 guara.ee <- st_bbox(guara) %>% 
   st_as_sfc() %>% 
@@ -63,6 +64,20 @@ if(readline(prompt = "This will take 30 minutes. Hit enter to proceed or type 'n
          " Minutes Elapsed. ")
   evi.df <- as.data.frame(cc.evi)
   colnames(evi.df) <- c('hex_id', stringr::str_replace_all(substr(colnames(evi.df[, 2:ncol(evi.df)]), 2, 11), "_", "-"))
-  write.csv(x = evi.df, file = "~/guara_evi.csv")}
+  write.csv(x = evi.df, file = "~/guara_evi.csv")
+  }
 
 df <- read_csv("guara_evi.csv")
+
+# Now we are going to perform a time series analysis on the data within each grid cell. But first, we will work through the procedure one step at a time.
+
+evi.hw.lst <- list() #Create an empty list, this will be used to house the time series projections for each cell. 
+evi.dcmp.lst <- list() #Create an empty list, this will be used to house the time series decomposition for each cell.
+evi.trend <- data.frame(hex_id = evi.df$hex_id, na.cnt = NA, na.cnt.2 = NA, trend = NA, p.val = NA, r2 = NA, std.er = NA, trnd.strngth = NA, seas.strngth = NA) #This data frame will hold the trend data
+Dates <- data.frame(date = seq(as.Date('2001-01-01'), as.Date('2022-11-01'), "month"))
+Dates$month <- month(Dates$date)
+Dates$year <- year(Dates$date)
+i <- 1
+tsv <- data.frame(evi = t(evi.df[i, 2:ncol(evi.df)])) #converting the data to a transposed data frame
+colnames(tsv) <- c("evi")
+head(tsv) #let's take a look

@@ -2,6 +2,8 @@
 library(rgee)
 library(sf)
 
+reticulate::py_module_available()
+
 # initialize
 ee_Initialize()
 
