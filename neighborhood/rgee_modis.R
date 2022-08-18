@@ -225,7 +225,7 @@ head(evi.trend) #Let's take a peak
 
 # plot a density plot showing the spread of trend values in Guaratinguetá
 
-ggdensity(evi.trend, x = "trend", 
+ggpubr::ggdensity(evi.trend, x = "trend", 
           fill = "#0073C2FF", 
           color = "#0073C2FF",
           add = "mean", 
@@ -253,7 +253,7 @@ pop <- paste0("<b> Hex ID: </b>",hex_trend$hex_id,"<br><b>NA Count: </b>",hex_tr
 
 map <- hex_trend %>%
   leaflet() %>%
-  setView(-122.2207, 45.1879, 9) %>%
+  setView(-22.793028310964505, -45.18305342940922, 9) %>%
   addProviderTiles("Esri.WorldTopoMap", group = "Topo Map") %>%
   addProviderTiles("CartoDB.Positron", group = "CartoDB", 
                    options = providerTileOptions(opacity = 0.7)) %>%
@@ -286,3 +286,13 @@ map <- hex_trend %>%
   addScaleBar(position='bottomleft')
 
 map
+
+hex_trend
+
+require(tmap)
+tmap_mode("view")
+tm_shape(hex_trend)+
+  tm_polygons("trend", style = 'fisher')+
+  tm_shape(census_gta)+
+  tm_borders(col = "grey3")
+  
