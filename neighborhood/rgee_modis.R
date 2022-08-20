@@ -289,9 +289,14 @@ map
 
 hex_trend
 
+# group by neighborhood
 census_gp <- census_gta %>% 
   group_by(name_neighborhood) %>% 
   summarise()
+
+# Filter my neighborhood
+clube <- census_gp %>% 
+   filter(name_neighborhood == "Clube dos 500")
   
 require(tmap)
 tmap_mode("view")
@@ -306,11 +311,22 @@ map
 
 tmap_save(map,filename = "hw_plots/map.html")  
 
-tm_shape(census_gp)+
+require(tmap)
+tmap_mode("view")
+map <- tm_shape(hex_trend)+
+  tm_polygons("trend",
+              style = 'fisher',
+              border.col = NA)+
+  tm_shape(census_gp)+
   tm_borders(col = "grey")+
+  tm_text("name_neighborhood",
+          fontfamily = "sans",
+          fontface = "bold.italic",
+          size = 1.5)+
+  tm_view(bbox=sf::st_bbox(hex_trend),
+          set.zoom.limits = c(10,16))
   
+map
 
-sf::st_bbox(hex_trend)
-  tm_text("name_neighborhood")
 
   
