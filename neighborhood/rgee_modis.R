@@ -300,7 +300,10 @@ map <- tm_shape(hex_trend)+
               style = 'fisher',
               border.col = NA)+
   tm_view(bbox=sf::st_bbox(hex_trend),
-          set.zoom.limits = c(10.4,16))
+          set.zoom.limits = c(10,16))
+
+map
+
 tmap_save(map,filename = "hw_plots/map.html")  
 
 tm_shape(census_gp)+
