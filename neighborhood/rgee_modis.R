@@ -295,12 +295,15 @@ census_gp <- census_gta %>%
   
 require(tmap)
 tmap_mode("view")
-tm_shape(hex_trend)+
+map <- tm_shape(hex_trend)+
   tm_polygons("trend",
-              style = 'fisher',border.col = NA)+
-  tm_view(bbox=sf::st_bbox(hex_trend),set.zoom.limits = c(10,16))
-  
-  tm_shape(census_gp)+
+              style = 'fisher',
+              border.col = NA)+
+  tm_view(bbox=sf::st_bbox(hex_trend),
+          set.zoom.limits = c(10.4,16))
+tmap_save(map,filename = "hw_plots/map.html")  
+
+tm_shape(census_gp)+
   tm_borders(col = "grey")+
   
 
