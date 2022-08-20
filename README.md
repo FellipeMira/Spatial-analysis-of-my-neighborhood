@@ -15,3 +15,8 @@ This project is focused on the spatial analysis of the environmental and social 
 
 ![alt text](/neighborhood/map_png.png)
 
+
+![alt text](/neighborhood/hw_2852.png)
+
+
+
