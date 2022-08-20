@@ -296,7 +296,7 @@ census_gp <- census_gta %>%
 require(tmap)
 tmap_mode("plot")
 tm_shape(hex_trend)+
-  tm_polygons("trend",palette =viridis::viridis(4),
+  tm_polygons("trend",palette = viridis::viridis(4),
               style = 'fisher',border.col = NA)+
   tm_shape(census_gp)+
   tm_borders(col = "grey")+
