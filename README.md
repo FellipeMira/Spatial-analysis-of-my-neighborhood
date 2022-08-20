@@ -9,7 +9,7 @@ This project is focused on the spatial analysis of the environmental and social 
 
 ## My Neighborhood
 
-![alt text](/neighborhood/)
+![alt text](/neighborhood/clube.png)
 
 # Statistical Modelling
 

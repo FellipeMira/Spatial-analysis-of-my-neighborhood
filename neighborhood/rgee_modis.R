@@ -296,37 +296,46 @@ census_gp <- census_gta %>%
 
 # Filter my neighborhood
 clube <- census_gp %>% 
-   filter(name_neighborhood == "Clube dos 500")
-  
-require(tmap)
-tmap_mode("view")
-map <- tm_shape(hex_trend)+
-  tm_polygons("trend",
-              style = 'fisher',
-              border.col = NA)+
-  tm_view(bbox=sf::st_bbox(hex_trend),
-          set.zoom.limits = c(10,16))
+   filter(name_neighborhood == "Clube Dos 500")
 
-map
-
-tmap_save(map,filename = "hw_plots/map.html")  
+# Create bbox to neighborhood
+box_clube <- 
+  sf::st_bbox(clube) %>% sf::st_as_sfc()
 
 require(tmap)
 tmap_mode("view")
-map <- tm_shape(hex_trend)+
+map1 <- tm_shape(hex_trend)+
   tm_polygons("trend",
               style = 'fisher',
               border.col = NA)+
   tm_shape(census_gp)+
   tm_borders(col = "grey")+
+  tm_shape(box_clube)+
+  tm_borders(col = "black",lwd =  2)+
+  tm_view(bbox=sf::st_bbox(hex_trend),
+          set.zoom.limits = c(10,16))
+
+map1
+
+require(tmap)
+tmap_mode("view")
+map <- tm_shape(hex_trend)+
+  tm_polygons("trend",
+              style = 'fisher',
+              border.col = NA,legend.show = FALSE)+
+  
+  tm_shape(census_gp)+
+  tm_borders(col = "grey")+
   tm_text("name_neighborhood",
           fontfamily = "sans",
-          fontface = "bold.italic",
+          fontface = "bold",
           size = 1.5)+
+  tm_shape(clube)+
+  tm_borders(col="grey1")+
   tm_view(bbox=sf::st_bbox(hex_trend),
           set.zoom.limits = c(10,16))
   
 map
 
-
+tmap_arrange(map1,map,ncol = 2,sync = F)
   
