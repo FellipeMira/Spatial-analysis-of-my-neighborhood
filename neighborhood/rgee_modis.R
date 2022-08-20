@@ -289,10 +289,20 @@ map
 
 hex_trend
 
+census_gp <- census_gta %>% 
+  group_by(name_neighborhood) %>% 
+  summarise()
+  
 require(tmap)
-tmap_mode("view")
+tmap_mode("plot")
 tm_shape(hex_trend)+
-  tm_polygons("trend", style = 'fisher')+
-  tm_shape(census_gta)+
-  tm_borders(col = "grey3")
+  tm_polygons("trend",palette =viridis::viridis(4),
+              style = 'fisher',border.col = NA)+
+  tm_shape(census_gp)+
+  tm_borders(col = "grey")+
+  tm_view(bbox=sf::st_bbox(hex_trend),set.zoom.limits = c(10,13))
+
+sf::st_bbox(hex_trend)
+  tm_text("name_neighborhood")
+
   
