@@ -3,5 +3,5 @@ This project is focused on the spatial analysis of the environmental and social 
 
 # ROI
 
-![alt text]()
+![alt text](/neighborhood/hw_plots/map.svg)
 
