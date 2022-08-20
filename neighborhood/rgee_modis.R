@@ -294,13 +294,15 @@ census_gp <- census_gta %>%
   summarise()
   
 require(tmap)
-tmap_mode("plot")
+tmap_mode("view")
 tm_shape(hex_trend)+
-  tm_polygons("trend",palette = viridis::viridis(4),
+  tm_polygons("trend",
               style = 'fisher',border.col = NA)+
+  tm_view(bbox=sf::st_bbox(hex_trend),set.zoom.limits = c(10,16))
+  
   tm_shape(census_gp)+
   tm_borders(col = "grey")+
-  tm_view(bbox=sf::st_bbox(hex_trend),set.zoom.limits = c(10,13))
+  
 
 sf::st_bbox(hex_trend)
   tm_text("name_neighborhood")
