@@ -13,10 +13,10 @@ This project is focused on the spatial analysis of the environmental and social 
 
 # Statistical Modelling
 
-![alt text](/neighborhood/map_png.png)
+![alt text](/neighborhood/decomp_plots/hw_2852.png)
 
 
-![alt text](/neighborhood/hw_2852.png)
+![alt text](/neighborhood/hw_plots/hw_2852.png)
 
 
 
