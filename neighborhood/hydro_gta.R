@@ -27,7 +27,8 @@ ggplot()+
   theme_light()
 
 data_flu_acre <- stationsData(
-  # [1:10,] specifics that you are interest only in the first 10 rows (stations)
   inventoryResult = inv_flu_acre,
-  deleteNAstations = F
-)
+  deleteNAstations = F)
+
+tidy_data_acre <- organize(stationsDataResult = data_flu_acre)
+
