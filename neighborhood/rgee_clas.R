@@ -1,12 +1,17 @@
 library(rgee)
 library(tidyverse)
+library(rgee)
 
+#rgee::ee_install_upgrade()
+
+#reticulate::py_install('earthengine-api==0.1.317', envname='vrgee')
+
+ee_Initialize(drive = T)
 
 guara.ee <- st_bbox(guara) %>% 
   st_as_sfc() %>% 
   sf_as_ee() #Converts it to an Earth Engine Object
 
-x <- ee$Image("LANDSAT/LC08/C02/T1_L2/") %>% ee$Image$getInfo()
 
 land8 <- 
   ee$ImageCollection("LANDSAT/LC08/C02/T1_L2")$
