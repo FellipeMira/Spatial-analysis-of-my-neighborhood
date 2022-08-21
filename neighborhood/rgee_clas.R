@@ -16,7 +16,7 @@ guara.ee <-
 
 #Landsat 8 col
 land8 <- 
-  ee$ImageCollection("LANDSAT/LC08/C02/T1_L2")
+  ee$ImageCollection("LANDSAT/LC08/C01/T1_SR")
 #JRC col
 gsw <- ee$Image("JRC/GSW1_2/GlobalSurfaceWater")
 
@@ -62,8 +62,34 @@ col1 <- col1$reduce(ee$Reducer$percentile(list(90)))$mask(water_mask)
 
 # Band names ver.
 bandNames <- col1$bandNames()
-ee_help(bandNames)
-rm(bandNames)
+
+bandNames$getInfo()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 clear_collection <- land8$map(maskClouds)
 
