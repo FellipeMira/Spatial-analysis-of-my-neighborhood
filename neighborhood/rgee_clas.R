@@ -17,6 +17,7 @@ guara.ee <-
 #Landsat 8 col
 land8 <- 
   ee$ImageCollection("LANDSAT/LC08/C01/T1_SR")
+
 #JRC col
 gsw <- ee$Image("JRC/GSW1_2/GlobalSurfaceWater")
 
@@ -67,45 +68,4 @@ bandNames$getInfo()
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-clear_collection <- land8$map(maskClouds)
-
-lc8_gta <- lc8_gta$select(c('ST_B10'))$toBands()  
-ee_print(lc8_gta)
-
-colorizedVis <- list(
-  min=10,
-  max=30,
-  palette=c(
-    'FFFFFF', 'CE7E45', 'DF923D', 'F1B555', 'FCD163', '99B718', '74A901',
-    '66A000', '529400', '3E8601', '207401', '056201', '004C00', '023B01',
-    '012E01', '011D01', '011301'
-  )
-)
-
-b10 <- lc8_gta$select('LC08_218076_20140201_ST_B10')
-Map$addLayer(b10, colorizedVis, '2021 03 15')
 
